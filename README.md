@@ -3,7 +3,7 @@
 Olá! Se você ainda não se aplicou para esta vaga, preencha o nosso [Formulário de pré-seleção](https://forms.gle/uEwouDrgVRRfZy9y8).
 
 Abaixo apresentamos o desafio para os candidatos à vaga de **Desenvolvedor Fullstack RPA**:
-1. [Desafio 01](https://github.com/mostqi/desafios-frontend/tree/main/desafio-01) 
+1. [Desafio 01](https://github.com/mostqi/desafios-fullstack-rpa/tree/main/desafio-01) 
 
 ## Instruções
 Você deve clonar este projeto e desenvolvê-lo em seu próprio repositório, em modo **privado**, preservando assim o seu código. 
