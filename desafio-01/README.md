@@ -62,7 +62,7 @@ Durante a apresentação deve-se demonstrar a execução de bots simultaneamente
 | ------------- | ------------- | ------------- |
 | 1 - Sucesso  | CPF ou NIS  | Json contendo dados coletados e evidência da tela. |
 | 2 - Exceção  | CPF ou NIS | CPF ou NIS não será encontrado na base. Deve-se apresentar como resultado o Json contendo mensagem de erro com descrição  “Não foi possível retornar os dados no tempo de resposta solicitado”.  |
-| 3 - Sucesso  | Nome completo com paginação nos detalhes  | Json contendo dados coletados e evidência da tela. |
+| 3 - Sucesso  | Nome completo  | Json contendo dados coletados e evidência da tela. |
 | 4 - Exceção  | Nome completo  | O nome completo não será encontrado na base. Deve-se apresentar como resultado o Json contendo mensagem de erro com descrição “Foram encontrados 0 resultados para o termo …” |
 | 5 - Sucesso  | Nome (apenas sobrenome) + opção do filtro “BENEFICIÁRIO DE PROGRAMA SOCIAL”. Deve-se coletar os dados do primeiro registro do resultado da busca.  | Json contendo dados coletados e evidência da tela. |
 
