@@ -5,7 +5,7 @@ Neste desafio você deverá desenvolver **um robô autônomo (não assistido) pa
 
 ## Instruções
 Você deve clonar este projeto e desenvolvê-lo em seu próprio repositório, em modo privado.
-Para o desenvolvimento do robô deve-se utilizar a linguagem Python e a biblioteca Pyppeteer [Pyppeteer](https://pyppeteer.github.io/pyppeteer/reference.html).
+Esperamos testar as habilidades do candidato no desenvolvimento utilizando as tecnologias Python, Django, a biblioteca Pyppeteer [Pyppeteer](https://pyppeteer.github.io/pyppeteer/reference.html) e conteinerização com [Docker](https://www.docker.com/resources/what-container).
 
 
 ## O desafio
