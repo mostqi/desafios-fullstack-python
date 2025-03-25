@@ -1,69 +1,117 @@
-# Desafio Desenvolvedor Front-End
+# Desafio Estágio - Full Stack Developer (Python)
 
 Chegou a hora do desafio! 
-Neste desafio você deverá desenvolver **um robô autônomo (não assistido) para  acesso e captura de dados no site indicado, bem como criar um arquivo de saída com os dados coletados**.
 
-## Instruções
+Você está prestes a demonstrar suas habilidades em hiperautomação em um cenário realista. 
+
+# Instruções
+
 Você deve clonar este projeto e desenvolvê-lo em seu próprio repositório, em modo privado.
-Esperamos testar as habilidades do candidato no desenvolvimento utilizando as tecnologias Python, Django, a biblioteca [Pyppeteer](https://pyppeteer.github.io/pyppeteer/reference.html) e conteinerização com [Docker](https://www.docker.com/resources/what-container).
 
+A implementação deve ficar na pasta correspondente ao desafio. Fique à vontade para adicionar qualquer tipo de conteúdo que julgue útil ao projeto como, alterar/acrescentar um README com instruções de como executá-lo, etc.
 
-## O desafio
+O projeto deverá ser apresentado à equipe do mostQi, onde serão avaliados o domínio das tecnologias envolvidas e a contextualização do candidato com o problema apresentado. A qualidade do código, versionamento, documentação, entre outros itens também serão avaliados.
 
-### Rota
+# O desafio
+
+Seu desafio é desenvolver um robô autônomo (não assistido) que:
+
+1. Acesse o Portal da Transparência do Governo Federal.  
+2. Consulte e extraia dados de beneficiários com base nos parâmetros fornecidos.  
+3. Gere um arquivo JSON estruturado com os dados coletados e uma evidência em Base64.
+
+Este desafio avaliará sua capacidade de:  
+✅ Implementar automações Web.  
+✅ Garantir resiliência com tratamento robusto de erros.  
+✅ Organizar e documentar soluções. 
+
+O robô deve ser capaz de executar em modo headless, respeitar timeouts configuráveis e suportar execuções simultâneas.
+
+**Diferenciais (opcionais):**
+
+* Documentar e publicar API para teste via Swagger/OpenAPI.
+
+## Premissas técnicas
+
+O desenvolvimento deve ser realizado utilizando:
+
+* Linguagem: **Python**.  
+* Biblioteca principal: [**Playwright**](https://playwright.dev/) para automação web.
+
+## Automação Web
+
 O robô deve executar autonomamente os passos abaixo, a partir do recebimento de requisição com os parâmetros de entrada.
 
-#### Parâmetros de entrada
-Os parâmetros podem ser de tipos/formatos variados, sendo:
-* Timeout em milissegundos (obrigatório).
-* Nome, CPF ou NIS (obrigatório).
-* Opção de refinamento da busca - “BENEFICIÁRIO DE PROGRAMA SOCIAL”.
+### Parâmetros de Entrada
 
-#### Passos
-1. Acessar o Portal da Transparência do Governo Brasileiro: https://www.portaltransparencia.gov.br/
-2. Acessar a tela de consulta “Pessoas físicas”
-![2](https://user-images.githubusercontent.com/16540224/190150915-3467a4d0-06d3-4c12-a5d5-3605cc95e4bd.jpg)
-3. Inserir os parâmetros de entrada e “buscar”.
-![3](https://user-images.githubusercontent.com/16540224/190151164-cbf5f1f2-a191-40f2-a545-6e1999964eae.jpg)
-4. Em “Resultados” clicar no nome do primeiro resultado apresentado para aceder a tela “Panorama da relação da pessoa com o Governo Federal”
-![4](https://user-images.githubusercontent.com/16540224/190151287-880a48eb-66fd-4bc8-8810-30828ba5d612.jpg)
-5. Coletar os dados “Nome”, “CPF”, e “Localidade” na tela “Pessoa Física”.
-6. Gerar a imagem a partir do print da tela  “Pessoa Física” como forma de evidência da consulta realizada. 
-7. No bloco “Recebimentos de recursos”, se houver, coletar o nome do benefício, o  “Valor Recebido” e clicar em “Detalhar” (para cada benefício existente). 
-![7](https://user-images.githubusercontent.com/16540224/190151381-2350c151-aad4-4f9e-a8c9-ca4cd43e2248.jpg)
-**Obs.**: Pode haver mais de um bloco de informação, para cada tipo de benefício que o cidadão recebeu. Neste caso deve-se coletar os dados dos benefícios e seus respectivos detalhes para: Auxílio Brasil, Auxílio Emergencial e Bolsa Família. Deve-se acessar a página de detalhe respectiva, coletando os dados, retornando à página anterior e repetindo os passos até que se colete os dados dos tipos de benefícios listados acima.
-![7-2](https://user-images.githubusercontent.com/16540224/190151599-6c186cd3-5bfe-4737-b769-e2ee263d7582.jpg)
-8. Na tela “Auxílio Emergencial - Parcelas Disponibilizadas ao Beneficiário” coletar os dados de todas as linhas e colunas do grid com informações e valores do benefício em questão, de todas as páginas disponíveis.
-![8](https://user-images.githubusercontent.com/16540224/190151646-af30daa3-ecc6-4874-837a-ed480b93f01f.jpg)
-9. No caso em que a pessoa consultada tenha recebido mais de um benefício, deve-se coletar os dados, como dito na observação do item 7. Abaixo apresentamos exemplos dos dados para cada tipo de benefício a coletar:
-9.1. Exemplo dados do Auxilio Brasil:
-![9-1](https://user-images.githubusercontent.com/16540224/190151739-19b2bddd-4248-413c-b812-2b3a20776fea.jpg)
-9.2. Exemplo dados do Auxílio Emergencial:
-![9-2](https://user-images.githubusercontent.com/16540224/190151805-724aa740-1883-4e68-96ee-a3ac52ed0efc.jpg)
-9.3. Exemplo Bolsa Família: Para o Bolsa Família são apresentados dois blocos. Deve-se coletar ambos.
-![9-3-1](https://user-images.githubusercontent.com/16540224/190151925-8bfc5546-3de1-4ac3-a596-aa34fa2caf49.jpg)
-![9-3-2](https://user-images.githubusercontent.com/16540224/190152041-f1450464-43a4-43af-aafb-c4747803b195.jpg)
-10. Encerrar o navegador e gerar um Json com todos os dados coletados, de modo organizado, com os dados globais (nome, CPF, Localidade) e os detalhes aninhados por tipo de Benefício. Neste Json, além dos dados coletados, deve-se constar um atributo “file” contendo a imagem da evidência coletada (esta deve estar no formato Base64).
+* **Nome, CPF ou NIS** (obrigatório): Dados para a busca. O CPF deve ser fornecido com ou sem pontuação, e o NIS com ou sem máscara.  
+* **Filtro de Busca**: "BENEFICIÁRIO DE PROGRAMA SOCIAL" \- se fornecido, o robô deve aplicar esse filtro na busca.
 
-#### Detalhes de execução
-* A solução desenvolvida deve permitir a execução de vários bots em simultâneo.
-* O bot deve funcionar no modo headless.
-* O bot deve respeitar o tempo de resposta passado como parâmetro de entrada (em milisegundos). Caso este seja atingido sem se concluir a coleta dos dados, deve-se retornar um json contendo a mensagem de erro “Não foi possível retornar os dados no tempo de resposta solicitado”.
+### Passos
+
+1. Acessar o [Portal da Transparência](https://www.portaltransparencia.gov.br/) e navegar até a tela de consulta de "Pessoas Físicas e Jurídicas".  
+   ![chrome_7t8SmOCwGd](https://github.com/user-attachments/assets/5544006a-e8e5-4b57-b14c-39f97d37ab4b)
+
+2. Acessar a tela de “Busca de Pessoa Física”  
+   ![chrome_S2XSb3O3Qi](https://github.com/user-attachments/assets/580c2da2-8f5c-4546-9d46-a365111786e7)
+
+3. Inserir os parâmetros de entrada e realizar a busca.  
+   ![chrome_s3kInqbppX](https://github.com/user-attachments/assets/664b728a-733a-4c65-9601-c4fafc66fb7c)
+
+4. Em “Resultados” clicar no nome do primeiro resultado apresentado para aceder a tela “Panorama da relação da pessoa com o Governo Federal”  
+   ![chrome_UfrdAZp5Wn](https://github.com/user-attachments/assets/f74baf99-7f31-46cf-9f2e-1e480488d1af)
+
+5. Na tela “Pessoa Física” Coletar os dados do primeiro resultado, incluindo nome, CPF, localidade, e detalhes dos benefícios recebidos (Auxílio Brasil, Auxílio Emergencial, Bolsa Família).  
+6. Capturar uma imagem da tela como evidência e convertê-la para Base64.  
+7. No bloco “Recebimentos de recursos”, se houver, clicar em “Detalhar” (para cada benefício existente).   
+   ![chrome_HLYqU5kFHx](https://github.com/user-attachments/assets/193c2888-b9b5-4094-994e-c79c440c7e84)
+
+
+8. Deve-se acessar a página de detalhe respectiva, coletando os dados, retornando à página anterior e repetindo os passos até que se colete os dados dos tipos de benefícios listados na observação abaixo.  
+![chrome_00MI1mmOOF](https://github.com/user-attachments/assets/2ae5f207-9431-4c5a-b529-222da43ec886) 
+**Obs**.: Pode haver mais de um bloco de informação, para cada tipo de benefício que o cidadão recebeu. **Neste caso deve-se coletar os dados dos benefícios e seus respectivos detalhes para: Auxílio Brasil, Auxílio Emergencial e Bolsa Família.**  
+
+9. Encerrar o navegador e gerar um JSON com os dados coletados, incluindo a imagem em Base64.
+
+### Detalhes adicionais
+
+* O robô deve funcionar em modo headless.  
 * Os passos acima são referências de como um humano executaria tal consulta, sendo o objetivo principal a coleta dos dados e da evidência da página. Caso queira desenvolver através de outro caminho que julgue mais otimizado, fique à vontade.
 
-### Itens desejáveis (bônus)
-Será considerado um bônus a disponibilização online do bot como serviço, permitindo o teste do seu consumo via interface [swagger](https://swagger.io/docs/) ou em outra ferramenta para documentação interativa de API no padrão OpenAPI.
+## Bônus
 
-### Instruções para a apresentação 
+Será considerado um bônus a disponibilização online do bot como API, permitindo o teste do seu consumo via interface [swagger](https://swagger.io/docs/) ou em outra ferramenta para documentação interativa de API no padrão OpenAPI.
+
+## Cenários de Teste
+
 Os desafios serão apresentados em data e hora combinados previamente por e-mail.
-Durante a apresentação deve-se demonstrar a execução de bots simultaneamente, no mínimo para os cenários abaixo. Os parâmetros específicos para cada cenário serão indicados durante a apresentação.
 
-| Cenário  | Tipo Parâmetro de Entrada | Resultado Esperado |
-| ------------- | ------------- | ------------- |
-| 1 - Sucesso  | CPF ou NIS  | Json contendo dados coletados e evidência da tela. |
-| 2 - Exceção  | CPF ou NIS | CPF ou NIS não será encontrado na base. Deve-se apresentar como resultado o Json contendo mensagem de erro com descrição  “Não foi possível retornar os dados no tempo de resposta solicitado”.  |
-| 3 - Sucesso  | Nome completo  | Json contendo dados coletados e evidência da tela. |
-| 4 - Exceção  | Nome completo  | O nome completo não será encontrado na base. Deve-se apresentar como resultado o Json contendo mensagem de erro com descrição “Foram encontrados 0 resultados para o termo …” |
-| 5 - Sucesso  | Nome (apenas sobrenome) + opção do filtro “BENEFICIÁRIO DE PROGRAMA SOCIAL”. Deve-se coletar os dados do primeiro registro do resultado da busca.  | Json contendo dados coletados e evidência da tela. |
+Durante a apresentação deve-se demonstrar a execução de bots, no mínimo para os cenários abaixo. 
 
-Serão avaliados todo o processo executado pelo bot, decisões de desenvolvimento e não apenas o alcance do resultado.
+**Os parâmetros específicos para cada cenário serão indicados pelos avaliadores durante a apresentação.**
+
+| Cenário | Tipo Parâmetro de Entrada | Resultado Esperado |
+| :---- | :---- | :---- |
+| 1 \- Sucesso | CPF ou NIS | Json contendo dados coletados e evidência da tela. |
+| 2- Exceção | CPF ou NIS | CPF ou NIS não será encontrado na base. Deve-se apresentar como resultado o Json contendo mensagem de erro com descrição  “Não foi possível retornar os dados no tempo de resposta solicitado”. |
+| 3 \- Sucesso | Nome completo com paginação nos detalhes | Json contendo dados coletados e evidência da tela. |
+| 4- Exceção | Nome completo | O nome completo não será encontrado na base. Deve-se apresentar como resultado o Json contendo mensagem de erro com descrição “Foram encontrados **0** resultados para o termo …” |
+| 5 \- Sucesso | Nome (apenas sobrenome) \+ opção do filtro “BENEFICIÁRIO DE PROGRAMA SOCIAL”. Deve-se coletar os dados do primeiro registro do resultado da busca. | Json contendo dados coletados e evidência da tela. |
+
+## Avaliação
+
+* Demonstração do funcionamento do bot, com execução de todos os cenários de teste propostos no desafio.  
+* Qualidade do código (legibilidade, modularização, boas práticas).  
+* Documentação (README, comentários no código).  
+* Versionamento (uso de Git, organização do repositório).
+
+## Considerações Finais
+
+O candidato pode incluir um breve relatório explicando as decisões de desenvolvimento e desafios enfrentados.   
+O tempo estimado para conclusão do desafio é de 4-6 horas.
+
+## **mostQI**
+
+Acesse nosso [Linkedin](https://www.linkedin.com/company/mobile-solution-technology/posts/?feedView=all) para mais informações sobre vagas e novidades.
+
+Até breve! 🤩  
