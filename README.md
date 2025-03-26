@@ -4,7 +4,7 @@ Olá! Se você ainda não se aplicou para uma vaga, preencha o nosso formulário
 
 |Vaga|Formulário de pré-seleção| Desafio|
 |---|---|---|
-| **Estágio** - Full Stack Developer (Python) |[Formulário de pré-seleção](https://forms.gle/iEtnhGG2k73V5Uf59)| [Desafio 01](https://github.com/mostqi/desafios-fullstack-rpa/tree/main/desafio-01) |
+| Full Stack Developer (Python) |[Formulário de pré-seleção](https://forms.gle/iEtnhGG2k73V5Uf59)| [Desafio 01 - (RPA e Hiperautomação)](https://github.com/mostqi/desafios-fullstack-rpa/tree/main/desafio-01) |
 
 
 
