@@ -5,7 +5,7 @@ Olá! Se você ainda não se aplicou para uma vaga, preencha o nosso formulário
 |Vaga|Formulário de pré-seleção| Desafio|
 |---|---|---|
 | **Estágio** - Full Stack Developer (Python) |[Formulário de pré-seleção](https://forms.gle/iEtnhGG2k73V5Uf59)| [Desafio 01](https://github.com/mostqi/desafios-fullstack-rpa/tree/main/desafio-01) |
-|Full Stack Developer (Python) |[Formulário de pré-seleção]()| [Desafio 02]() |
+
 
 
 ## Instruções
@@ -15,8 +15,9 @@ A implementação deve ficar na pasta correspondente ao desafio. Fique à vontad
 
 ## Entrega
 
-Os desafios serão apresentados em data e hora combinados previamente por e-mail.
-O projeto deverá ser apresentado à equipe do mostQi, onde serão avaliados o domínio das tecnologias envolvidas e a contextualização do candidato com o problema apresentado. A qualidade do código, versionamento, documentação, entre outros itens também serão avaliados.
+Realizar a entrega do desafio através do e-mail rh@most.com.br.
+
+Após a entrega, iremos avaliar todos os desafios recebidos. Caso seu desafio seja pré-aprovado, entraremos em contato para agendar uma apresentação e entrevista técnica.
 
 ## mostQI
 
