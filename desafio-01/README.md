@@ -1,117 +1,115 @@
-# Desafio Estágio - Full Stack Developer (Python)
+# Desafio Full Stack Developer - Python (RPA e Hiperautomação)
 
-Chegou a hora do desafio! 
+# 1\. Introdução
 
-Você está prestes a demonstrar suas habilidades em hiperautomação em um cenário realista. 
+Bem-vindo ao nosso desafio técnico\! Este teste avaliará suas habilidades em automação robótica de processos (RPA) e hiperautomação, combinando desenvolvimento Python com integração de ferramentas low-code/no-code.
 
-# Instruções
+## O que esperamos de você:
 
-Você deve clonar este projeto e desenvolvê-lo em seu próprio repositório, em modo privado.
+* Implementação de um robô autônomo para coleta de dados.  
+* Criação de um workflow automatizado (parte bônus) para acionamento do robô e integração com APIs do Google (Drive e Sheets).  
+* Boas práticas de código e documentação.
 
-A implementação deve ficar na pasta correspondente ao desafio. Fique à vontade para adicionar qualquer tipo de conteúdo que julgue útil ao projeto como, alterar/acrescentar um README com instruções de como executá-lo, etc.
+# 2\. Detalhes do Desafio
 
-O projeto deverá ser apresentado à equipe do mostQi, onde serão avaliados o domínio das tecnologias envolvidas e a contextualização do candidato com o problema apresentado. A qualidade do código, versionamento, documentação, entre outros itens também serão avaliados.
+## Parte 1: Automação Web (Obrigatório)
 
-# O desafio
+**Parâmetros de Entrada**
 
-Seu desafio é desenvolver um robô autônomo (não assistido) que:
+* **Nome, CPF ou NIS (obrigatório).**  
+* **Filtro de Busca:** "BENEFICIÁRIO DE PROGRAMA SOCIAL" (opcional).
 
-1. Acesse o Portal da Transparência do Governo Federal.  
-2. Consulte e extraia dados de beneficiários com base nos parâmetros fornecidos.  
-3. Gere um arquivo JSON estruturado com os dados coletados e uma evidência em Base64.
+**Objetivo:** Desenvolver um robô em Python para:
 
-Este desafio avaliará sua capacidade de:  
-✅ Implementar automações Web.  
-✅ Garantir resiliência com tratamento robusto de erros.  
-✅ Organizar e documentar soluções. 
-
-O robô deve ser capaz de executar em modo headless, respeitar timeouts configuráveis e suportar execuções simultâneas.
-
-**Diferenciais (opcionais):**
-
-* Documentar e publicar API para teste via Swagger/OpenAPI.
-
-## Premissas técnicas
-
-O desenvolvimento deve ser realizado utilizando:
-
-* Linguagem: **Python**.  
-* Biblioteca principal: [**Playwright**](https://playwright.dev/) para automação web.
-
-## Automação Web
-
-O robô deve executar autonomamente os passos abaixo, a partir do recebimento de requisição com os parâmetros de entrada.
-
-### Parâmetros de Entrada
-
-* **Nome, CPF ou NIS** (obrigatório): Dados para a busca. O CPF deve ser fornecido com ou sem pontuação, e o NIS com ou sem máscara.  
-* **Filtro de Busca**: "BENEFICIÁRIO DE PROGRAMA SOCIAL" \- se fornecido, o robô deve aplicar esse filtro na busca.
-
-### Passos
-
-1. Acessar o [Portal da Transparência](https://www.portaltransparencia.gov.br/) e navegar até a tela de consulta de "Pessoas Físicas e Jurídicas".  
-   ![chrome_7t8SmOCwGd](https://github.com/user-attachments/assets/5544006a-e8e5-4b57-b14c-39f97d37ab4b)
-
-2. Acessar a tela de “Busca de Pessoa Física”  
-   ![chrome_S2XSb3O3Qi](https://github.com/user-attachments/assets/580c2da2-8f5c-4546-9d46-a365111786e7)
-
-3. Inserir os parâmetros de entrada e realizar a busca.  
+1. Acessar o **Portal da Transparência** e navegar até a consulta de "Pessoas Físicas e Jurídicas".  
+    ![chrome_S2XSb3O3Qi](https://github.com/user-attachments/assets/580c2da2-8f5c-4546-9d46-a365111786e7)
+2. Inserir os parâmetros e realizar a busca.  
    ![chrome_s3kInqbppX](https://github.com/user-attachments/assets/664b728a-733a-4c65-9601-c4fafc66fb7c)
-
-4. Em “Resultados” clicar no nome do primeiro resultado apresentado para aceder a tela “Panorama da relação da pessoa com o Governo Federal”  
-   ![chrome_UfrdAZp5Wn](https://github.com/user-attachments/assets/f74baf99-7f31-46cf-9f2e-1e480488d1af)
-
-5. Na tela “Pessoa Física” Coletar os dados do primeiro resultado, incluindo nome, CPF, localidade, e detalhes dos benefícios recebidos (Auxílio Brasil, Auxílio Emergencial, Bolsa Família).  
-6. Capturar uma imagem da tela como evidência e convertê-la para Base64.  
-7. No bloco “Recebimentos de recursos”, se houver, clicar em “Detalhar” (para cada benefício existente).   
+3. Coletar os dados disponíveis na tela " Pessoa Física \- Panorama da relação da pessoa com o Governo Federal".  
    ![chrome_HLYqU5kFHx](https://github.com/user-attachments/assets/193c2888-b9b5-4094-994e-c79c440c7e84)
+4. Capturar uma **imagem da tela** como evidência e convertê-la para Base64.  
+5. Para cada benefício encontrado (Auxílio Brasil, Auxílio Emergencial, Bolsa Família), acessar os detalhes e coletar as informações.  
+   ![chrome_00MI1mmOOF](https://github.com/user-attachments/assets/2ae5f207-9431-4c5a-b529-222da43ec886) 
+6. Encerrar a automação e gerar um **JSON** contendo os dados coletados e a imagem Base64.
 
+### Requisitos técnicos:
 
-8. Deve-se acessar a página de detalhe respectiva, coletando os dados, retornando à página anterior e repetindo os passos até que se colete os dados dos tipos de benefícios listados na observação abaixo.  
-![chrome_00MI1mmOOF](https://github.com/user-attachments/assets/2ae5f207-9431-4c5a-b529-222da43ec886) 
-**Obs**.: Pode haver mais de um bloco de informação, para cada tipo de benefício que o cidadão recebeu. **Neste caso deve-se coletar os dados dos benefícios e seus respectivos detalhes para: Auxílio Brasil, Auxílio Emergencial e Bolsa Família.**  
+* Linguagem: Python.  
+* Biblioteca recomendada: [**Playwright**](https://playwright.dev/).  
+  * Caso opte por outra biblioteca, justifique tecnicamente a escolha e demonstre benefícios.  
+* O robô deve funcionar em **modo headless** e permitir execuções simultâneas.
 
-9. Encerrar o navegador e gerar um JSON com os dados coletados, incluindo a imagem em Base64.
+Se a Parte 2 for implementada, o bot deve ser disponibilizado como API online para testes. Caso desenvolva apenas a Parte 1, é um diferencial fornecer a API documentada via Swagger ou OpenAPI.
 
-### Detalhes adicionais
+## Parte 2: Hiperautomação (Bônus)
+![image](https://github.com/user-attachments/assets/70d1f110-2b49-4344-b929-7e2179c7ccd0)
 
-* O robô deve funcionar em modo headless.  
-* Os passos acima são referências de como um humano executaria tal consulta, sendo o objetivo principal a coleta dos dados e da evidência da página. Caso queira desenvolver através de outro caminho que julgue mais otimizado, fique à vontade.
+**Objetivo:** Criar um workflow automatizado que:
 
-## Bônus
+1. Faça requisição via API ao robô desenvolvido na Parte 1\.  
+2. Obtenha e armazene automaticamente o arquivo JSON no Google Drive (nome padrão: \[`IDENTIFICADOR_UNICO]_[DATA_HORA].json`).  
+3. Atualize um registro centralizado no Google Sheets contendo:  
+   * Identificador único da consulta, Nome, CPF, data/hora da consulta.  
+   * Link direto para o arquivo JSON respectivo no Drive.
 
-Será considerado um bônus a disponibilização online do bot como API, permitindo o teste do seu consumo via interface [swagger](https://swagger.io/docs/) ou em outra ferramenta para documentação interativa de API no padrão OpenAPI.
+### Ferramentas sugeridas (free tier):
 
-## Cenários de Teste
+* [Activepieces](https://www.activepieces.com/)  
+* [Make.com](http://Make.com)  
+* [Zapier](https://zapier.com/)
 
-Os desafios serão apresentados em data e hora combinados previamente por e-mail.
+# 3\. Critérios de Avaliação
 
-Durante a apresentação deve-se demonstrar a execução de bots, no mínimo para os cenários abaixo. 
+| Categoria | Detalhes |
+| :---- | :---- |
+| Funcionalidade | Execução correta do robô em todos os cenários de teste. |
+| Código | Legibilidade, modularização, tratamento de erros. |
+| Integrações | Uso eficiente da plataforma de workflow e das APIs do Google (se aplicável). |
+| Segurança | Boas práticas (OAuth 2.0, variáveis de ambiente). |
+| Documentação | README claro, comentários relevantes. |
+| Bônus | Implementação da Parte 2 e/ou diferenciais (notificações, testes, etc.) |
 
-**Os parâmetros específicos para cada cenário serão indicados pelos avaliadores durante a apresentação.**
+# 4\. Entrega e Processo
 
-| Cenário | Tipo Parâmetro de Entrada | Resultado Esperado |
+1. **Envio:** Finalizando o desafio, encaminhar e-mail para [rh@most.com.br](mailto:rh@most.com.br) com:  
+   * Código fonte do robô (Git repository ou arquivo compactado).  
+   * Incluir um breve relatório explicando:  
+     * Decisões técnicas.  
+     * Desafios enfrentados.  
+     * Plataforma escolhida para Parte 2 (se aplicável) e motivos.
+
+   
+
+2. **Apresentação**:  
+   * Os desafios pré-selecionados terão uma apresentação técnica agendada.  
+     * Para uma apresentação clara e objetiva, sugerimos que o candidato organize seu fluxo em duas etapas: primeiro, utilize um PPT para explicar a abordagem, decisões técnicas e desafios enfrentados no desenvolvimento. Em seguida, passe para a demonstração prática, evidenciando o funcionamento da solução e respondendo a perguntas dos avaliadores.  
+   * Durante a apresentação, será necessário demonstrar execução simultânea dos bots e o armazenamento correto dos dados.
+
+**Prazo estimado:** 12-20 horas
+
+# 5\. Cenários de Teste
+
+| Cenário | Entrada | Saída Esperada |
 | :---- | :---- | :---- |
-| 1 \- Sucesso | CPF ou NIS | Json contendo dados coletados e evidência da tela. |
-| 2- Exceção | CPF ou NIS | CPF ou NIS não será encontrado na base. Deve-se apresentar como resultado o Json contendo mensagem de erro com descrição  “Não foi possível retornar os dados no tempo de resposta solicitado”. |
-| 3 \- Sucesso | Nome completo com paginação nos detalhes | Json contendo dados coletados e evidência da tela. |
-| 4- Exceção | Nome completo | O nome completo não será encontrado na base. Deve-se apresentar como resultado o Json contendo mensagem de erro com descrição “Foram encontrados **0** resultados para o termo …” |
-| 5 \- Sucesso | Nome (apenas sobrenome) \+ opção do filtro “BENEFICIÁRIO DE PROGRAMA SOCIAL”. Deve-se coletar os dados do primeiro registro do resultado da busca. | Json contendo dados coletados e evidência da tela. |
+| Sucesso (CPF) | CPF ou NIS válido | JSON com dados coletados e evidência da tela. |
+| Erro (CPF) | CPF ou NIS inexistente | JSON com mensagem de erro: "Não foi possível retornar os dados no tempo de resposta solicitado". |
+| Sucesso (Nome) | Nome completo | JSON com dados do primeiro registro equivalente encontrado \+ evidência |
+| Erro (Nome) | Nome inexistente | JSON com mensagem de erro: "Foram encontrados 0 resultados para o termo …". |
+| Filtrado | Sobrenome \+ filtro social | JSON com dados do primeiro registro equivalente encontrado \+ evidência |
 
-## Avaliação
+# 6\. Considerações Finais
 
-* Demonstração do funcionamento do bot, com execução de todos os cenários de teste propostos no desafio.  
-* Qualidade do código (legibilidade, modularização, boas práticas).  
-* Documentação (README, comentários no código).  
-* Versionamento (uso de Git, organização do repositório).
+Este desafio simula um projeto real de hiperautomação.   
+Valorizamos:
 
-## Considerações Finais
-
-O candidato pode incluir um breve relatório explicando as decisões de desenvolvimento e desafios enfrentados.   
-O tempo estimado para conclusão do desafio é de 4-6 horas.
+* Soluções bem arquitetadas.  
+* Documentação clara.  
+* Justificativas técnicas para decisões.
 
 ## **mostQI**
 
-Acesse nosso [Linkedin](https://www.linkedin.com/company/mobile-solution-technology/posts/?feedView=all) para mais informações sobre vagas e novidades.
+Acesse nosso [Linkedin](https://www.linkedin.com/company/mobile-solution-technology) para mais informações sobre vagas e novidades.
 
-Até breve! 🤩  
+Até breve\! 🤩  
+
+
